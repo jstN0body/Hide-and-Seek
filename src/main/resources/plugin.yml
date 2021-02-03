@@ -1,0 +1,11 @@
+name: hide_and_seek
+version: 2.1
+api-version: 1.16
+author: jstN0body
+main: com.github.jstN0body.hideandseek.HideAndSeekPlugin
+
+commands:
+  compass:
+    usage: "/compass [give|update] [delay|<hunter> <hider>]"
+  hideandseek:
+    usage: "/hideandseek prepare"
