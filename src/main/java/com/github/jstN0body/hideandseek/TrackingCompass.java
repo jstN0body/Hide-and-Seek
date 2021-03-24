@@ -99,6 +99,6 @@ public class TrackingCompass implements Listener {
 
     @Override
     public String toString() {
-        return "Tracking compass of " + trackedPlayer.getName();
+        return "Compass tracking: " + trackedPlayer.getName();
     }
 }
