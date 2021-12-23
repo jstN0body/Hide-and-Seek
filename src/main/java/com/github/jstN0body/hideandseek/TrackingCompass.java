@@ -57,7 +57,7 @@ public class TrackingCompass implements Listener {
      */
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
-        if (event.getEntity().equals(trackedPlayer)) {
+        if (event.getEntity().getUniqueId().equals(trackedPlayer.getUniqueId())) {
             TrackingCompass.COMPASSES.remove(this);
             updateHolder();
             int index = holder.getInventory().first(compassItem);
