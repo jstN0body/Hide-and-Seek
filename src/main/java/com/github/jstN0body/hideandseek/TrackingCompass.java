@@ -2,6 +2,7 @@ package com.github.jstN0body.hideandseek;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,7 +24,7 @@ public class TrackingCompass implements Listener {
     private final CompassMeta meta = (CompassMeta) compassItem.getItemMeta();
 
     private Player holder;
-    private final Player trackedPlayer;
+    public final Player trackedPlayer;
 
     /**
      * @param holder the player to give the compass to.
@@ -59,11 +60,7 @@ public class TrackingCompass implements Listener {
     public void onPlayerDeath(PlayerDeathEvent event) {
         if (event.getEntity().getUniqueId().equals(trackedPlayer.getUniqueId())) {
             TrackingCompass.COMPASSES.remove(this);
-            updateHolder();
-            int index = holder.getInventory().first(compassItem);
-            meta.setLodestone(event.getEntity().getLocation());
-            compassItem.setItemMeta(meta);
-            holder.getInventory().setItem(index, compassItem);
+            update(event.getEntity().getLocation());
             holder.sendMessage(ChatColor.LIGHT_PURPLE + "Your target, " + trackedPlayer.getName() + ", has died. Now tracking their grave.");
         }
     }
@@ -86,10 +83,10 @@ public class TrackingCompass implements Listener {
     /**
      * Updates the location that the compass is tracking.
      */
-    public void update() {
+    public void update(Location location) {
         if (updateHolder()) {
             int index = holder.getInventory().first(compassItem);
-            meta.setLodestone(this.trackedPlayer.getLocation());
+            meta.setLodestone(location);
             compassItem.setItemMeta(meta);
             holder.getInventory().setItem(index, compassItem);
             return;

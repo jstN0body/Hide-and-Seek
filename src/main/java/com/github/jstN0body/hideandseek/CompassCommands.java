@@ -46,7 +46,7 @@ public class CompassCommands implements CommandExecutor {
             Bukkit.getScheduler().cancelTasks(plugin);
             Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
                 for (TrackingCompass compass : TrackingCompass.COMPASSES) {
-                    compass.update();
+                    compass.update(compass.trackedPlayer.getLocation());
                 }
                 Bukkit.broadcastMessage(ChatColor.GREEN + "Compasses Updated!");
             }, 0, delay);
